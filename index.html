@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LiteCall" />
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22LiteCall%20%5Cu2014%20Low-Data%20Video%20%26%20Voice%22%2C%22short_name%22%3A%22LiteCall%22%2C%22start_url%22%3A%22./%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%230f172a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEsElEQVR4nO3dQW4TYRAF4Q5iz5IzkCXH4YAchy3HgQ1WEjOxx/GM53V1fXskp7vo/ImQePry9flPSRCfjv4A0pYMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UD4f/QFIvv389eE/%2B/vH9w0/yVxP/pcUH3NPvGsZ%2Be0MeqVHBHyNgV9n0BckRPwe415m0AuSQz5n2G8Z9D%2BdIn6PcRs0IuRzk8Me/XtoYsxV3K9rjZEXetLCp13rUUFPCvnclLDHPDkmx1w15%2BsfEfSUZV4zYQ7oJ8eEBX4U9QmCvdDGfBl1PsigqcvaGnFOuKCJS9oTbV6ooGnLeRTS3DBBk5ZyBMr8EEFTlnE0whzbB01YQpLu82wddPfhp%2Bo817ZBdx56B13n2zZoaUnLoLtej246zrld0B2H3Fm3ebcKuttwKTrNvVXQ0jVtgu50JYi6zL9N0Cmo/46YokXQadfh94/vI8NO28OS%2BKCTh2jUeeKDTjf1WqeKDjr9Grw2KezkvUQH3dGUqFMZ9A4mXes0sUEnf1tbixx16n5ig6bwWj9WZNCpf/vvQQw7cU%2BRQZPRok5j0AcgXusUcUEnfhvbCyHstH3FBT1R96iTGHQIwrVOYNBhDPs%2BUUGnvceO1CnqpL1FBa23vNa3M%2BgGDHs9g27EqK8z6Ga81pfFBJ30g0UHaVGn7C8maN3Oa/0/gwYw7BcGDWLUBo0z/VobNNTUsA0ablrUBj3ApGv9%2BegPoP2l/I74EbzQcJNirvJCY00L%2BcSgYaaGfOKTA2R6zFVeaARDfmHQjRny/2KeHFN%2BT7qVtJhT9ueFbiYt5DQxF1rXGfN1XugGDHk9gw5myLeLenKk/GCRoFPMSXvzQofpFHIigw5hyNuIenJMZczbiQs66T22t28/f7WPOW1fPjkO0D3iZHEXms6Y9xUZdNq3sS0QnhfnEvfkk2NntIjTRV7oqsy//bcix5y6Hy/0Dsghp4u90F0Z87Gig079traE%2BEPfe5L34pPjTlMi7iL6QldlX4OJMSfvo6pB0FV5Q5z0vHgtbQ9LWgSdZGLInbQJusN1IOsy/zZBS2u0CrrLlaDpNPdWQVf1Gi5Bt3m3C7qq35C76jjnlkFL72kbdMfr0UnX%2BbYNuqrv0NN1nmvroKt6Dz9R93m2D7qq/xJSEOaICLqKsYwjUeaHCbqKs5RHI80NFXQVazmPQJsXLugq3pL2QpwTMugq5rK2RJ3P05evz3%2BO/hB7898wv6CGfIK90K/Rl7jWhDmMCLpqxjIvmfL1j3hynJv0BJkS8snIoE/IYU8L%2BWTMk2MJdenUr2uN0Rf6NcK1nhzyiUEv6BS3Eb9l0Bckh23Iywx6pYS4jfg6g/6gRwRuwLcz6A3dE7nxbsOghTL699DiMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIXyF35KWxjhLbIoAAAAAElFTkSuQmCC%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image/png%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEsElEQVR4nO3dQW4TYRAF4Q5iz5IzkCXH4YAchy3HgQ1WEjOxx/GM53V1fXskp7vo/ImQePry9flPSRCfjv4A0pYMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UD4f/QFIvv389eE/+/vH9w0/yVxP/pcUH3NPvGsZ+e0MeqVHBHyNgV9n0BckRPwe415m0AuSQz5n2G8Z9D+dIn6PcRs0IuRzk8Me/XtoYsxV3K9rjZEXetLCp13rUUFPCvnclLDHPDkmx1w15+sfEfSUZV4zYQ7oJ8eEBX4U9QmCvdDGfBl1PsigqcvaGnFOuKCJS9oTbV6ooGnLeRTS3DBBk5ZyBMr8EEFTlnE0whzbB01YQpLu82wddPfhp+o817ZBdx56B13n2zZoaUnLoLtej246zrld0B2H3Fm3ebcKuttwKTrNvVXQ0jVtgu50JYi6zL9N0Cmo/46YokXQadfh94/vI8NO28OS+KCTh2jUeeKDTjf1WqeKDjr9Grw2KezkvUQH3dGUqFMZ9A4mXes0sUEnf1tbixx16n5ig6bwWj9WZNCpf/vvQQw7cU+RQZPRok5j0AcgXusUcUEnfhvbCyHstH3FBT1R96iTGHQIwrVOYNBhDPs+UUGnvceO1CnqpL1FBa23vNa3M+gGDHs9g27EqK8z6Ga81pfFBJ30g0UHaVGn7C8maN3Oa/0/gwYw7BcGDWLUBo0z/VobNNTUsA0ablrUBj3ApGv9+egPoP2l/I74EbzQcJNirvJCY00L+cSgYaaGfOKTA2R6zFVeaARDfmHQjRny/2KeHFN+T7qVtJhT9ueFbiYt5DQxF1rXGfN1XugGDHk9gw5myLeLenKk/GCRoFPMSXvzQofpFHIigw5hyNuIenJMZczbiQs66T22t28/f7WPOW1fPjkO0D3iZHEXms6Y9xUZdNq3sS0QnhfnEvfkk2NntIjTRV7oqsy//bcix5y6Hy/0Dsghp4u90F0Z87Gig079traE+EPfe5L34pPjTlMi7iL6QldlX4OJMSfvo6pB0FV5Q5z0vHgtbQ9LWgSdZGLInbQJusN1IOsy/zZBS2u0CrrLlaDpNPdWQVf1Gi5Bt3m3C7qq35C76jjnlkFL72kbdMfr0UnX+bYNuqrv0NN1nmvroKt6Dz9R93m2D7qq/xJSEOaICLqKsYwjUeaHCbqKs5RHI80NFXQVazmPQJsXLugq3pL2QpwTMugq5rK2RJ3P05evz3+O/hB7898wv6CGfIK90K/Rl7jWhDmMCLpqxjIvmfL1j3hynJv0BJkS8snIoE/IYU8L+WTMk2MJdenUr2uN0Rf6NcK1nhzyiUEv6BS3Eb9l0Bckh23Iywx6pYS4jfg6g/6gRwRuwLcz6A3dE7nxbsOghTL699DiMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIXyF35KWxjhLbIoAAAAAElFTkSuQmCC" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAEsElEQVR4nO3dQW4TYRAF4Q5iz5IzkCXH4YAchy3HgQ1WEjOxx/GM53V1fXskp7vo/ImQePry9flPSRCfjv4A0pYMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UD4f/QFIvv389eE/+/vH9w0/yVxP/pcUH3NPvGsZ+e0MeqVHBHyNgV9n0BckRPwe415m0AuSQz5n2G8Z9D+dIn6PcRs0IuRzk8Me/XtoYsxV3K9rjZEXetLCp13rUUFPCvnclLDHPDkmx1w15+sfEfSUZV4zYQ7oJ8eEBX4U9QmCvdDGfBl1PsigqcvaGnFOuKCJS9oTbV6ooGnLeRTS3DBBk5ZyBMr8EEFTlnE0whzbB01YQpLu82wddPfhp+o817ZBdx56B13n2zZoaUnLoLtej246zrld0B2H3Fm3ebcKuttwKTrNvVXQ0jVtgu50JYi6zL9N0Cmo/46YokXQadfh94/vI8NO28OS+KCTh2jUeeKDTjf1WqeKDjr9Grw2KezkvUQH3dGUqFMZ9A4mXes0sUEnf1tbixx16n5ig6bwWj9WZNCpf/vvQQw7cU+RQZPRok5j0AcgXusUcUEnfhvbCyHstH3FBT1R96iTGHQIwrVOYNBhDPs+UUGnvceO1CnqpL1FBa23vNa3M+gGDHs9g27EqK8z6Ga81pfFBJ30g0UHaVGn7C8maN3Oa/0/gwYw7BcGDWLUBo0z/VobNNTUsA0ablrUBj3ApGv9+egPoP2l/I74EbzQcJNirvJCY00L+cSgYaaGfOKTA2R6zFVeaARDfmHQjRny/2KeHFN+T7qVtJhT9ueFbiYt5DQxF1rXGfN1XugGDHk9gw5myLeLenKk/GCRoFPMSXvzQofpFHIigw5hyNuIenJMZczbiQs66T22t28/f7WPOW1fPjkO0D3iZHEXms6Y9xUZdNq3sS0QnhfnEvfkk2NntIjTRV7oqsy//bcix5y6Hy/0Dsghp4u90F0Z87Gig079traE+EPfe5L34pPjTlMi7iL6QldlX4OJMSfvo6pB0FV5Q5z0vHgtbQ9LWgSdZGLInbQJusN1IOsy/zZBS2u0CrrLlaDpNPdWQVf1Gi5Bt3m3C7qq35C76jjnlkFL72kbdMfr0UnX+bYNuqrv0NN1nmvroKt6Dz9R93m2D7qq/xJSEOaICLqKsYwjUeaHCbqKs5RHI80NFXQVazmPQJsXLugq3pL2QpwTMugq5rK2RJ3P05evz3+O/hB7898wv6CGfIK90K/Rl7jWhDmMCLpqxjIvmfL1j3hynJv0BJkS8snIoE/IYU8L+WTMk2MJdenUr2uN0Rf6NcK1nhzyiUEv6BS3Eb9l0Bckh23Iywx6pYS4jfg6g/6gRwRuwLcz6A3dE7nxbsOghTL699DiMWihGLRQDFooBi0UgxaKQQvFoIVi0EIxaKEYtFAMWigGLRSDFopBC8WghWLQQjFooRi0UAxaKAYtFIMWikELxaCFYtBCMWihGLRQDFooBi0UgxaKQQvFoIXyF35KWxjhLbIoAAAAAElFTkSuQmCC" />
+  <title>LiteCall — Low-Data Video &amp; Voice</title>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --border: #334155;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.96);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #eab308;
+      display: inline-block;
+    }
+    .status-dot.online {
+      background: var(--success);
+    }
+    .video-stage {
+      position: relative;
+      flex: 1;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 48dvh;
+    }
+    #remoteVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #020617;
+    }
+    #localVideo {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 96px;
+      height: 134px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: #1e293b;
+      z-index: 5;
+      transform: scaleX(-1);
+    }
+    .placeholder {
+      position: absolute;
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      max-width: 310px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .stats-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--text);
+      z-index: 5;
+    }
+    #unmuteOverlay {
+      position: absolute;
+      z-index: 10;
+      background: var(--accent);
+      color: #0f172a;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: none;
+    }
+    .panel {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 14px 16px calc(18px + env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    input, select {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 11px 12px;
+      border-radius: 10px;
+      font-size: 16px; /* Prevents iOS Safari auto-zoom on focus */
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: var(--accent);
+    }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    button:active {
+      opacity: 0.82;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0f172a;
+    }
+    .btn-success {
+      background: var(--success);
+      color: #052e16;
+    }
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn-ghost {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .controls button {
+      padding: 10px 4px;
+      font-size: 0.78rem;
+    }
+    .controls button.off {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      border-color: var(--danger);
+    }
+    details {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .turn-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="status-dot" id="statusDot"></span>
+    LiteCall
+    <span class="badge" id="dataModeBadge">Ultra-Lite ~0.9 MB/m</span>
+  </div>
+  <div class="row">
+    <button class="btn-ghost" id="installBtn" style="display:none;padding:6px 10px;font-size:0.76rem">Install</button>
+    <button class="btn-ghost" style="padding:6px 10px;font-size:0.76rem" onclick="shareRoomLink()">Share Link</button>
+  </div>
+</header>
+
+<div class="video-stage">
+  <div class="stats-pill" id="statsPill">Enter a room name below to start</div>
+  <div class="placeholder" id="placeholderText">
+    Type the same <strong>Room Name</strong> on both phones and tap <strong>Join Room</strong>—or tap <strong>Share Link</strong>.
+  </div>
+  <button id="unmuteOverlay" onclick="forcePlayRemote()">Tap to Enable Audio/Video</button>
+  <video id="remoteVideo" autoplay playsinline></video>
+  <video id="localVideo" autoplay playsinline muted></video>
+</div>
+
+<div class="panel">
+  <div class="row">
+    <select id="qualityMode" onchange="changeQualityMode()">
+      <option value="ultralite">Ultra-Lite Video (120 kbps • ~0.9 MB/min)</option>
+      <option value="balanced">Balanced Video (280 kbps • ~2.1 MB/min)</option>
+      <option value="voiceonly">Voice Only (32 kbps Opus • ~0.24 MB/min)</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <input type="text" id="roomInput" placeholder="Room name (e.g. family-call)" autocapitalize="none" autocorrect="off" />
+    <button class="btn-success" id="joinBtn" onclick="joinRoom()">Join Room</button>
+    <button class="btn-danger" id="hangupBtn" onclick="leaveRoom()" style="display:none">Leave</button>
+  </div>
+
+  <div class="controls">
+    <button class="btn-ghost" id="micBtn" onclick="toggleMic()">Mic On</button>
+    <button class="btn-ghost" id="camBtn" onclick="toggleCam()">Cam On</button>
+    <button class="btn-ghost" onclick="flipCamera()">Flip Cam</button>
+    <button class="btn-ghost" id="dataCounterBtn">0.00 MB</button>
+  </div>
+
+  <details>
+    <summary>Mobile Carrier NAT Relay (TURN) Settings</summary>
+    <div class="turn-grid">
+      <input type="text" id="turnUrl" placeholder="TURN URL (e.g. turn:global.relay.metered.ca:80)" autocapitalize="none" />
+      <div class="row">
+        <input type="text" id="turnUser" placeholder="TURN Username" autocapitalize="none" />
+        <input type="password" id="turnPass" placeholder="TURN Credential" />
+      </div>
+      <button class="btn-primary" onclick="saveServerSettings()">Save Relay Settings</button>
+    </div>
+  </details>
+</div>
+
+<script>
+  let peer = null;
+  let localStream = null;
+  let activeCall = null;
+  let facingMode = "user";
+  let micEnabled = true;
+  let camEnabled = true;
+  let statsTimer = null;
+  let wakeLock = null;
+  let deferredInstallPrompt = null;
+
+  const PROFILES = {
+    ultralite: { maxVideoBps: 120000, width: 320, height: 240, fps: 15, label: "Ultra-Lite ~0.9 MB/m" },
+    balanced:  { maxVideoBps: 280000, width: 480, height: 360, fps: 20, label: "Balanced ~2.1 MB/m" },
+    voiceonly: { maxVideoBps: 0,      width: 0,   height: 0,   fps: 0,  label: "Voice Only ~0.24 MB/m" }
+  };
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    const btn = document.getElementById("installBtn");
+    btn.style.display = "inline-block";
+    btn.onclick = async () => {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      btn.style.display = "none";
+    };
+  });
+
+  function getIceServers() {
+    const servers = [
+      { urls: "stun:stun.l.google.com:19302" },
+      { urls: "stun:stun1.l.google.com:19302" }
+    ];
+    const url = localStorage.getItem("turnUrl");
+    if (url) {
+      servers.push({
+        urls: url,
+        username: localStorage.getItem("turnUser") || "",
+        credential: localStorage.getItem("turnPass") || ""
+      });
+    }
+    return servers;
+  }
+
+  // Dynamically find Opus payload type (works on both iPhone Safari & Android Chrome)
+  function tuneOpusVoiceSDP(sdp) {
+    const match = sdp.match(/a=rtpmap:(\d+) opus\/48000/i);
+    if (!match) return sdp;
+    const pt = match[1];
+    const fmtpRegex = new RegExp(`a=fmtp:${pt} (.*)`, "g");
+    if (fmtpRegex.test(sdp)) {
+      return sdp.replace(fmtpRegex, `a=fmtp:${pt} $1;useinbandfec=1;usedtx=1;maxaveragebitrate=32000`);
+    }
+    return sdp;
+  }
+
+  async function requestWakeLock() {
+    if ("wakeLock" in navigator) {
+      try { wakeLock = await navigator.wakeLock.request("screen"); } catch (_) {}
+    }
+  }
+
+  function releaseWakeLock() {
+    if (wakeLock) {
+      wakeLock.release().catch(() => {});
+      wakeLock = null;
+    }
+  }
+
+  async function initMedia() {
+    const mode = PROFILES[document.getElementById("qualityMode").value];
+    if (localStream) localStream.getTracks().forEach(t => t.stop());
+
+    const constraints = {
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+        channelCount: 1
+      },
+      video: mode.maxVideoBps === 0 ? false : {
+        facingMode,
+        width: { ideal: mode.width, max: mode.width },
+        height: { ideal: mode.height, max: mode.height },
+        frameRate: { ideal: mode.fps, max: mode.fps }
+      }
+    };
+
+    localStream = await navigator.mediaDevices.getUserMedia(constraints);
+    document.getElementById("localVideo").srcObject = localStream;
+    camEnabled = mode.maxVideoBps > 0;
+    updateControlButtons();
+    return localStream;
+  }
+
+  function sanitizeRoom(raw) {
+    return raw.toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 24);
+  }
+
+  async function joinRoom() {
+    const room = sanitizeRoom(document.getElementById("roomInput").value.trim());
+    if (!room) return alert("Enter a room name first (e.g. test123).");
+    document.getElementById("roomInput").value = room;
+
+    try {
+      if (!localStream) await initMedia();
+    } catch (e) {
+      return alert("Please allow Camera & Microphone access in Safari/Browser settings.");
+    }
+
+    await requestWakeLock();
+    document.getElementById("joinBtn").style.display = "none";
+    document.getElementById("hangupBtn").style.display = "inline-block";
+    document.getElementById("statsPill").textContent = `Joining room "${room}"...`;
+
+    const hostId = `litecall-${room}-host`;
+    connectAsHostOrGuest(hostId, room);
+  }
+
+  function connectAsHostOrGuest(hostId, room) {
+    if (peer) peer.destroy();
+
+    peer = new Peer(hostId, {
+      debug: 1,
+      config: { iceServers: getIceServers() }
+    });
+
+    peer.on("open", () => {
+      document.getElementById("statusDot").classList.add("online");
+      document.getElementById("statsPill").textContent = `Room "${room}" open • Waiting for friend`;
+    });
+
+    peer.on("call", (call) => {
+      call.answer(localStream, { sdpTransform: tuneOpusVoiceSDP });
+      bindCallEvents(call, room);
+    });
+
+    peer.on("error", (err) => {
+      if (err.type === "unavailable-id") {
+        peer.destroy();
+        peer = new Peer(undefined, {
+          debug: 1,
+          config: { iceServers: getIceServers() }
+        });
+        peer.on("open", () => {
+          document.getElementById("statusDot").classList.add("online");
+          document.getElementById("statsPill").textContent = `Connecting to room "${room}"...`;
+          const call = peer.call(hostId, localStream, { sdpTransform: tuneOpusVoiceSDP });
+          bindCallEvents(call, room);
+        });
+      } else {
+        document.getElementById("statsPill").textContent = `Notice: ${err.type}`;
+      }
+    });
+  }
+
+  function bindCallEvents(call, room) {
+    activeCall = call;
+    call.on("stream", (remoteStream) => {
+      const rv = document.getElementById("remoteVideo");
+      rv.srcObject = remoteStream;
+      document.getElementById("placeholderText").style.display = "none";
+      rv.play().catch(() => {
+        document.getElementById("unmuteOverlay").style.display = "block";
+      });
+      applyBandwidthCap();
+      startStatsMonitor(room);
+    });
+
+    call.on("close", () => leaveRoom());
+    call.on("error", () => leaveRoom());
+  }
+
+  function forcePlayRemote() {
+    document.getElementById("remoteVideo").play();
+    document.getElementById("unmuteOverlay").style.display = "none";
+  }
+
+  async function applyBandwidthCap() {
+    const profile = PROFILES[document.getElementById("qualityMode").value];
+    document.getElementById("dataModeBadge").textContent = profile.label;
+
+    if (!activeCall || !activeCall.peerConnection) return;
+    for (const sender of activeCall.peerConnection.getSenders()) {
+      if (!sender.track) continue;
+      const params = sender.getParameters();
+      if (!params.encodings) params.encodings = [{}];
+
+      if (sender.track.kind === "video") {
+        sender.track.enabled = profile.maxVideoBps > 0 && camEnabled;
+        if (profile.maxVideoBps > 0) {
+          params.encodings[0].maxBitrate = profile.maxVideoBps;
+          params.encodings[0].maxFramerate = profile.fps;
+        }
+      } else if (sender.track.kind === "audio") {
+        params.encodings[0].maxBitrate = 32000;
+      }
+      await sender.setParameters(params).catch(() => {});
+    }
+  }
+
+  async function changeQualityMode() {
+    const profile = PROFILES[document.getElementById("qualityMode").value];
+    document.getElementById("dataModeBadge").textContent = profile.label;
+
+    if (localStream) {
+      await initMedia();
+      if (activeCall && activeCall.peerConnection) {
+        const newVideoTrack = localStream.getVideoTracks()[0];
+        const sender = activeCall.peerConnection.getSenders().find(s => s.track?.kind === "video");
+        if (sender && newVideoTrack) await sender.replaceTrack(newVideoTrack);
+      }
+      await applyBandwidthCap();
+    }
+  }
+
+  function startStatsMonitor(room) {
+    clearInterval(statsTimer);
+    statsTimer = setInterval(async () => {
+      if (!activeCall || !activeCall.peerConnection) return;
+      const stats = await activeCall.peerConnection.getStats();
+      let totalBytes = 0;
+      stats.forEach(report => {
+        if (report.type === "outbound-rtp" || report.type === "inbound-rtp") {
+          totalBytes += (report.bytesSent || 0) + (report.bytesReceived || 0);
+        }
+      });
+      const mbUsed = (totalBytes / (1024 * 1024)).toFixed(2);
+      document.getElementById("dataCounterBtn").textContent = `${mbUsed} MB`;
+      document.getElementById("statsPill").textContent = `Live • Room "${room}" • ${mbUsed} MB used`;
+    }, 2000);
+  }
+
+  function leaveRoom() {
+    clearInterval(statsTimer);
+    releaseWakeLock();
+    if (activeCall) activeCall.close();
+    if (peer) peer.destroy();
+    activeCall = null;
+    peer = null;
+
+    document.getElementById("statusDot").classList.remove("online");
+    document.getElementById("remoteVideo").srcObject = null;
+    document.getElementById("placeholderText").style.display = "block";
+    document.getElementById("joinBtn").style.display = "inline-block";
+    document.getElementById("hangupBtn").style.display = "none";
+    document.getElementById("statsPill").textContent = "Call ended • Ready";
+  }
+
+  function toggleMic() {
+    if (!localStream) return;
+    micEnabled = !micEnabled;
+    localStream.getAudioTracks().forEach(t => t.enabled = micEnabled);
+    updateControlButtons();
+  }
+
+  function toggleCam() {
+    if (!localStream) return;
+    camEnabled = !camEnabled;
+    localStream.getVideoTracks().forEach(t => t.enabled = camEnabled);
+    updateControlButtons();
+  }
+
+  async function flipCamera() {
+    facingMode = facingMode === "user" ? "environment" : "user";
+    if (!localStream) return;
+    await initMedia();
+    if (activeCall && activeCall.peerConnection) {
+      const videoTrack = localStream.getVideoTracks()[0];
+      const sender = activeCall.peerConnection.getSenders().find(s => s.track?.kind === "video");
+      if (sender && videoTrack) await sender.replaceTrack(videoTrack);
+    }
+  }
+
+  function updateControlButtons() {
+    const micBtn = document.getElementById("micBtn");
+    const camBtn = document.getElementById("camBtn");
+    micBtn.textContent = micEnabled ? "Mic On" : "Muted";
+    micBtn.classList.toggle("off", !micEnabled);
+    camBtn.textContent = camEnabled ? "Cam On" : "Cam Off";
+    camBtn.classList.toggle("off", !camEnabled);
+  }
+
+  async function shareRoomLink() {
+    const room = sanitizeRoom(document.getElementById("roomInput").value.trim()) || "chat-" + Math.floor(100 + Math.random() * 900);
+    document.getElementById("roomInput").value = room;
+    const url = `${location.origin}${location.pathname}?room=${room}`;
+
+    if (navigator.share) {
+      await navigator.share({ title: "Join my LiteCall room", url }).catch(() => {});
+    } else {
+      await navigator.clipboard.writeText(url);
+      document.getElementById("statsPill").textContent = `Copied invite link for "${room}"!`;
+    }
+  }
+
+  function saveServerSettings() {
+    localStorage.setItem("turnUrl", document.getElementById("turnUrl").value.trim());
+    localStorage.setItem("turnUser", document.getElementById("turnUser").value.trim());
+    localStorage.setItem("turnPass", document.getElementById("turnPass").value.trim());
+    alert("TURN relay settings saved.");
+  }
+
+  window.addEventListener("load", () => {
+    document.getElementById("turnUrl").value = localStorage.getItem("turnUrl") || "";
+    document.getElementById("turnUser").value = localStorage.getItem("turnUser") || "";
+    document.getElementById("turnPass").value = localStorage.getItem("turnPass") || "";
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("room")) {
+      document.getElementById("roomInput").value = sanitizeRoom(params.get("room"));
+      document.getElementById("statsPill").textContent = `Tap "Join Room" to enter "${params.get("room")}"`;
+    }
+  });
+</script>
+</body>
+</html>
